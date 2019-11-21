@@ -9,11 +9,14 @@ jobs:
         os: [ubuntu-latest, windows-latest]
         include:
           - os: ubuntu-latest
-            shell: nix-shell --run
+            #shell: nix-shell --run
+            shell: bash -lc
           - os: windows-latest
             #shell: C:\msys64\usr\bin\bash -lc
             shell: C:\Program\ Files\Git\bash -lc
       fail-fast: false
+    env:
+      SHELL: ${{ matrix.shell }}
     steps:
-      - run: ls -l
-        shell: ${{ matrix.shell }}
+      - run: $SHELL "ls -l"
+        shell: bash
