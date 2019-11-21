@@ -24,12 +24,13 @@ jobs:
           & $SHELL "ls -l; which ls"
         env:
           SHELL: $RUNNER_TEMP\msys64\usr\bin\bash.exe -lc
+        if: always()
       - run: "& msys2do ls -l; which ls"
         if: always()
-      - run: msys2do ls -l; which ls
+      - run: msys2do ls -l; which ls < /dev/null
         shell: cmd
         if: always()
-      - run: msys2do ls -l^; which ls
+      - run: msys2do ls -l; which ls ^< /dev/null
         shell: cmd
         if: always()
 
