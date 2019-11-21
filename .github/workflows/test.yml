@@ -12,14 +12,14 @@ jobs:
             #shell: nix-shell --run
             shell: bash -lc
           - os: windows-latest
-            shell: D:\msys64\usr\bin\bash.exe --noprofile --norc -eo pipefail
+            shell: $TEMP_RUNNER\msys64\usr\bin\bash.exe --noprofile --norc -eo pipefail
       fail-fast: false
     env:
       SHELL: ${{ matrix.shell }}
     steps:
       - uses: numworks/setup-msys2@v1
         if: matrix.os == 'windows-latest'
-      - run: ls -R /d/; echo $PATH; eval $SHELL 'echo $PATH && ls -l'
+      - run: echo $PATH; eval $SHELL 'echo $PATH && ls -l'
         shell: bash
       - run: msys2do.cmd 'echo $PATH && ls -l'
         shell: bash
