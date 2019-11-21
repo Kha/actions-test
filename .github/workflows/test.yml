@@ -14,7 +14,7 @@ jobs:
           - os: windows-latest
             shell: msys2do.cmd
       fail-fast: false
-    env:
+    env: &env
       SHELL: ${{ matrix.shell }}
       MSYS_NO_PATHCONV: 1
     steps:
@@ -27,6 +27,7 @@ jobs:
         if: always()
       - run: "& msys2do ls -l; which ls"
         if: always()
+        env: *env
       - run: msys2do ls -l; which ls < /dev/null
         shell: cmd
         if: always()
