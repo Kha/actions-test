@@ -8,15 +8,18 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
         include:
-          - os: ubuntu-latest
+          #- os: ubuntu-latest
             #shell: nix-shell --run
-            shell: bash -lc
+          #  shell: bash -lc
           - os: windows-latest
-            #shell: C:\msys64\usr\bin\bash -lc
-            shell: C:\Program\ Files\Git\bash -lc
+            shell: bash -lc
       fail-fast: false
     env:
       SHELL: ${{ matrix.shell }}
     steps:
-      - run: $SHELL "ls -l"
+      - uses: numworks/setup-msys2@v1
+        if: matrix.os == 'windows-latest'
+      - run: $SHELL 'echo $PATH && ls -l'
+        shell: bash
+      - run: msys2do.cmd 'echo $PATH && ls -l'
         shell: bash
