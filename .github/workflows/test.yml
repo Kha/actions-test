@@ -20,4 +20,11 @@ jobs:
     steps:
       - uses: numworks/setup-msys2@v1
         if: matrix.os == 'windows-latest'
-      - run: msys2do ls -l`; which ls
+      - run: "& msys2do ls -l; which ls"
+      - run: msys2do ls -l; which ls
+        shell: cmd
+        if: always()
+      - run: msys2do ls -l^; which ls
+        shell: cmd
+        if: always()
+
