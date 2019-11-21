@@ -1,0 +1,19 @@
+name: CI
+on: push
+
+jobs:
+  Build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        include:
+          - os: ubuntu-latest
+            shell: nix-shell --run
+          - os: windows-latest
+            #shell: C:\msys64\usr\bin\bash -lc
+            shell: C:\Program\ Files\Git\bash -lc
+      fail-fast: false
+    steps:
+      - run: ls -l
+        shell: ${{ matrix.shell }}
