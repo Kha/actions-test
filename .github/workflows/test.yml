@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: numworks/setup-msys2@v1
         if: matrix.os == 'windows-latest'
-      - run: $SHELL 'echo $PATH && ls -l'
+      - run: eval $SHELL 'echo $PATH && ls -l'
         shell: bash
       - run: msys2do.cmd 'echo $PATH && ls -l'
         shell: bash
